@@ -7,25 +7,20 @@
 
 # Specify data to extract and load
 extract:
-    - filepath: "T:/ABM/ABM_FY19/model_runs/ABM2Plus/v1221/2016_1422new_sxu/output"
+    - filepath: "C:/ABM3_dev/ABM/src/asim/visualizer/output"
       test_size:
       data:
-          - "householdData_3.csv"
-          - "personData_3.csv"
-          - "indivTourData_3.csv"
-          - "indivTripData_3.csv"
-          - "jointTripData_3.csv"
-          - "jointTourData_3.csv"
-          - "wsLocResults_3.csv"
-          - "aoResults.csv"
-          - "aoResults_Pre.csv"
-          - "visitorTrips.csv"
+          - "final_households.csv"
+          - "final_persons.csv"
+          - "final_tours.csv"
+          - "final_trips.csv"
+          - "final_joint_tour_participants.csv"
+    - filepath: "C:/ABM3_dev/ABM/src/asim/visualizer/data"
+      test_size:
+      data:
+          - "land_use.csv"
           - "traffic_skims_MD.omx"
-    - filepath: "T:/ABM/ABM_FY19/model_runs/ABM2Plus/v1221/2016_1422new_sxu/input"
-      test_size:
-      data:
-          - "mgra13_based_input2016.csv"
-    - filepath: "T:/ABM/ABM_FY19/model_runs/ABM2Plus/v1221/2016_1422new_sxu/visualizer/data"
+    - filepath: "C:/ABM3_dev/ABM/src/asim/visualizer/visualizer/data"
       test_size:
       data:
           - "geographicXwalk_PMSA.csv"
@@ -40,34 +35,34 @@ transform:
           merge:
               - table_name: hh
                 include:
-                    - householdData_3
-                    - mgra13_based_input2016
+                    - final_households
+                    - land_use
                 merge_cols:
-                    - home_mgra
-                    - mgra
+                    - home_zone_id
+                    - MAZ
                 merge_type: left
-              - table_name: wsLoc
+              - table_name: persons
                 include:
-                    - wsLocResults_3
+                    - final_persons
                     - geographicXwalk_PMSA 
                 merge_cols:
-                    - HomeMGRA
+                    - home_zone_id
                     - mgra
                 merge_type: left
-              - table_name: wsLoc
+              - table_name: persons
                 include:
-                    - wsLoc
+                    - persons
                     - geographicXwalk_PMSA
                 merge_cols:
-                    - WorkLocation
+                    - workplace_zone_id
                     - mgra
                 merge_type: left
-              - table_name: wsLoc
+              - table_name: persons
                 include:
-                    - wsLoc
+                    - persons
                     - geographicXwalk_PMSA
                 merge_cols:
-                    - SchoolLocation
+                    - school_zone_id
                     - mgra
                 merge_type: left
               
@@ -80,19 +75,19 @@ transform:
           merge:
               - table_name: hh_itours
                 include:
-                    - householdData_3
+                    - final_households
                     - indivTourData_3
                 merge_cols:
-                    - hh_id
-                    - hh_id
+                    - household_id
+                    - household_id
                 merge_type: left
               - table_name: hh_jtours
                 include:
-                    - householdData_3
+                    - final_households
                     - jointTourData_3
                 merge_cols:
-                    - hh_id
-                    - hh_id
+                    - household_id
+                    - household_id
                 merge_type: left
 
         - name: step_3

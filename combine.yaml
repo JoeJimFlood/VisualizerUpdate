@@ -1,7 +1,7 @@
 runs:
-  test: output
-  check: T:\ABM\ABM_FY19\model_runs\ABM2Plus\v1221\2016_1422new_sxu\visualizer\outputs\summaries\BUILD
-outpath: check
+  survey: hts
+  model: output
+outpath: data
 tables:
   #activePertypeDistbn:
   #  merge:
@@ -9,9 +9,6 @@ tables:
   autoOwnership:
     merge:
       - HHVEH
-  autoOwnership_AV:
-    merge:
-      - AVs
   avgStopOutofDirectionDist_vis:
     merge:
       - purpose
@@ -29,18 +26,6 @@ tables:
       HDISTRICT: Total
     dtype:
       freq: int
-  esctype_by_chauffeurtype:
-    merge:
-      - esc_type
-      - chauffeur
-    total:
-      chauffeur: Total
-  esctype_by_childtype:
-    merge:
-      - esc_type
-      - child_type
-    total:
-      child_type: Total
   hhSizeDist:
     merge:
       - HHSIZE
@@ -83,10 +68,21 @@ tables:
       - purpose
     total:
       District: Total
+  # mandTLFD_et:
+  #   merge:
+  #     - distbin
+  #     - District
+  #     - purpose
+  #   total:
+  #     District: Total
   mandTripLengths:
     merge:
       - District
       - purpose
+  # mandTripLengths_et:
+  #   merge:
+  #     - District
+  #     - purpose
   mtfSummary_vis:
     merge:
       - PERTYPE
@@ -100,6 +96,9 @@ tables:
   nonMandTripLengths:
     merge:
       - purpose
+  # nonMandTripLengths_et:
+  #   merge:
+  #     - purpose
   pertypeDistbn:
     merge:
       - PERTYPE
@@ -167,6 +166,12 @@ tables:
       - purpose
     total:
       purpose: Total
+  # tourDistProfile_et_vis:
+  #   merge:
+  #     - distbin
+  #     - purpose
+    total:
+      purpose: Total
   tourDuration:
     merge:
       - tourdur
@@ -199,7 +204,3 @@ tables:
   wfh_summary:
     merge:
       - District
-  worker_school_escorting:
-    merge:
-      - inb_escort_type
-      - out_escort_type
